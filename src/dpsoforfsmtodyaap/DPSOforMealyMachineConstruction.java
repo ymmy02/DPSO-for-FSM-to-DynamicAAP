@@ -3,14 +3,18 @@ package dpsoforfsmtodyaap;
 
 public class DPSOforMealyMachineConstruction {
 	
+	private String            trailFiles[]       = null;
 	private AntSimulator      antSimulator       = null;
 	private MealyMachineCodec mealyMachineCodec  = null;
 
 	private int[][]           bestMatrix         = null;
 	private double            bestFitness        = 0.0;
 	private MealyMachine      bestMealyMachine   = null;
+	
+	private int               envIndex           = 0;
  	
-	public DPSOforMealyMachineConstruction(AntSimulator antSimulator) {
+	public DPSOforMealyMachineConstruction(AntSimulator antSimulator, String[] trailFiles) {
+		this.trailFiles = trailFiles;
 		this.antSimulator = antSimulator;
 	}
 	
@@ -109,8 +113,8 @@ public class DPSOforMealyMachineConstruction {
 		if (loopCount%Const.NSKIP == 0) {
 			System.out.println("########## Time Step: " + String.valueOf(loopCount) + " ##########");
 			System.out.println("Best Fitness: " + String.valueOf(bestFitness));
-			System.out.println("Best Encoded Mealy Machine");
-			Func.printMatrix(gbest);
+			//System.out.println("Best Encoded Mealy Machine");
+			//Func.printMatrix(gbest);
 		}
 	}
 
@@ -139,6 +143,7 @@ public class DPSOforMealyMachineConstruction {
 			for (Swarm swarm : swarms) {
 				// Test if the Environment is changed
 				if (swarm.doesEnvironmentChange(antSimulator, mealyMachineCodec)) {
+					swarm.restAttractor();
 					swarm.evaluate(antSimulator);
 					swarm.updatePersonalBest();
 					swarm.updateGlobalBest(mealyMachineCodec);
@@ -155,6 +160,13 @@ public class DPSOforMealyMachineConstruction {
 
 			setBest(swarms);
 			printLog(bestMatrix, bestFitness, n+1);
+			
+			if (n%Const.NENVCHANGE == 0 && n != 0) {
+				envIndex = Func.changeEnvIndex(envIndex);
+				System.out.println("***** Environment is Changed *****");
+				System.out.println("***** Trail No.: " + envIndex + " *****");
+				antSimulator.parseMatrix(trailFiles[envIndex]);
+			}
 		}
 		
 	}

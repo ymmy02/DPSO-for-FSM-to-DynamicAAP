@@ -113,6 +113,12 @@ public class Swarm {
 		}
 	}
 	
+	public void restAttractor() {
+		for (Particle particle : particles) {
+			particle.restBestFitness();
+		}
+	}
+
 	public boolean isConverged() {
 		int row = particles[0].getGbest().length;
 		int[][] best = particles[0].getGbest();

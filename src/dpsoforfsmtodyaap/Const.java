@@ -13,7 +13,7 @@ public final class Const {
 
 	// --- PSO Parameters --- //
 	static final int POPULATION       = 1000;
-	static final int MAXLOOP          = 100;
+	static final int MAXLOOP          = 250;
 	static final double VMIN          = -2.0;
 	static final double VMAX          = 2.0;
 	static final double W             = 0.0;
@@ -22,7 +22,10 @@ public final class Const {
 	
 	// --- Multi Swarm Parameters --- //
 	static final int NUMOFSWARMS      = 5;
-	static final double R_CLOUD       = 0.2;   // Ratio: 0 < R_EXCL < 1.0
-	static final double R_EXCL        = 0.2;   // Ratio: 0 < R_EXCL < 1.0
+	static final double R_CLOUD       = 0.6;   // Ratio: 0 < R_EXCL < 1.0
+	static final double R_EXCL        = 0.6;   // Ratio: 0 < R_EXCL < 1.0
+	
+	// --- Dynamic Environment Parameters --- //
+	static final int NENVCHANGE       = 50;
 
 }

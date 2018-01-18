@@ -123,6 +123,11 @@ public class Particle {
 		 }
 	 }
 	 
+	 public void restBestFitness() {
+		 pbestFitness = Const.LARGENEGATIVE;
+		 gbestFitness = Const.LARGENEGATIVE;
+	 }
+	 
 	 public void advance() {
 		 double r1 = Math.random();
 		 double r2 = Math.random();

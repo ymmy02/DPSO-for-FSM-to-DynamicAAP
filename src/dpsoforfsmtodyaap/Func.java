@@ -32,5 +32,33 @@ public class Func {
 		}
 		return count;
 	}
+	
+	public static int changeEnvIndex(int currentEnvIndex) {
+		int nextEnvIndex = 0;
+		double uniform = Math.random();
+		switch (currentEnvIndex) {
+		case 0:
+			if (uniform < 0.75) nextEnvIndex = 1;
+			else nextEnvIndex = 4;
+			break;
+		case 1:
+			if (uniform < 0.40) nextEnvIndex = 2;
+			else nextEnvIndex = 3;
+			break;
+		case 2:
+			if (uniform < 0.05) nextEnvIndex = 0;
+			else nextEnvIndex = 4;
+			break;
+		case 3:
+			if (uniform < 0.35) nextEnvIndex = 1;
+			else nextEnvIndex = 2;
+			break;
+		case 4:
+			if (uniform < 0.75) nextEnvIndex = 0;
+			else nextEnvIndex = 3;
+			break;
+		}
+		return nextEnvIndex;
+	}
 
 }

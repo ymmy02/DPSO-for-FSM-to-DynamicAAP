@@ -88,6 +88,34 @@ public class AntSimulator {
 		return (matrixExc.get(aheadRow).get(aheadCol) == "food");
 	}
 	
+	private void printTrail(ArrayList<ArrayList<String>> tmpMatrix) {
+		for (ArrayList<String> row : tmpMatrix) {
+			String line = "";
+			for (String col : row) {
+				switch (col) {
+				case "food":
+					line += "#";
+					break;
+				case "empty":
+					line += ".";
+					break;
+				case "passed":
+					line += "*";
+					break;
+				}
+			}
+			System.out.println(line);
+		}
+	}
+
+	private void printInfo() {
+		System.out.println("========== Trail Information ==========");
+		System.out.println("Width: " + matrixCol + " Height: " + matrixRow + " Foods: " + allFoods);
+		System.out.println("---------------------------------------");
+		printTrail(matrix);
+		System.out.println("---------------------------------------");
+	}
+
 	// ****** //
 	// Public //
 	// ****** //
@@ -128,6 +156,7 @@ public class AntSimulator {
 
 	public void parseMatrix(String fileName) {
 		matrix = new ArrayList<>();
+		allFoods = 0;
 		
 		try {
 			File f = new File(fileName);
@@ -173,25 +202,11 @@ public class AntSimulator {
 		for (ArrayList<String> row : matrix) {
 			matrixExc.add(new ArrayList<String>(row));
 		}
+		System.out.println("***** READ NEW TRAIL *****");
+		printInfo();
 	}
 	
 	public void printRoute() {
-		for (ArrayList<String> row : matrixExc) {
-			String line = "";
-			for (String col : row) {
-				switch (col) {
-				case "food":
-					line += "#";
-					break;
-				case "empty":
-					line += ".";
-					break;
-				case "passed":
-					line += "*";
-					break;
-				}
-			}
-			System.out.println(line);
-		}
+		printTrail(matrixExc);
 	}
 }
