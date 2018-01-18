@@ -162,9 +162,17 @@ public class DPSOforMealyMachineConstruction {
 			printLog(bestMatrix, bestFitness, n+1);
 			
 			if (n%Const.NENVCHANGE == 0 && n != 0) {
+				// Print Best Routing before the Environment is Changed
+				System.out.println("========== Best Mealy Machine in This Environment ==========");
+				bestMealyMachine.printTransitionTable();
+				System.out.println("========== Best Routing in This Environment ==========");
+				antSimulator.runWithFSM(bestMealyMachine);
+				antSimulator.printRoute();
+				antSimulator.reset();
+
 				envIndex = Func.changeEnvIndex(envIndex);
-				System.out.println("***** Environment is Changed *****");
-				System.out.println("***** Trail No.: " + envIndex + " *****");
+				System.out.println("========== Environment is Changed ==========");
+				System.out.println("Trail No.: " + envIndex);
 				antSimulator.parseMatrix(trailFiles[envIndex]);
 			}
 		}
