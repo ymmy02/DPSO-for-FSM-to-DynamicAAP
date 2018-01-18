@@ -168,6 +168,10 @@ public class DPSOforMealyMachineConstruction {
 				System.out.println("========== Best Routing in This Environment ==========");
 				antSimulator.runWithFSM(bestMealyMachine);
 				antSimulator.printRoute();
+				System.out.println("===================================================");
+				int eaten = antSimulator.getEaten();
+				int moves = antSimulator.getMoves();
+				System.out.println("The number of eaten foods : " + eaten + " Steps : " + moves);
 				antSimulator.reset();
 
 				envIndex = Func.changeEnvIndex(envIndex);
