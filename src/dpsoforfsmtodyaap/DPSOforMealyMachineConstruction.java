@@ -136,7 +136,19 @@ public class DPSOforMealyMachineConstruction {
 		}
 
 		// --- Main Loop --- //
-		for (int n=0; n < Const.MAXLOOP; n++) {
+		int maxLoop = Const.NENVCHANGE * trailFiles.length;
+		for (int n=0; n < maxLoop; n++) {
+			// Change the Environment
+			if (n%Const.NENVCHANGE == 0 && n != 0) {
+				// Print Best Result before the Environment is Changed
+				printBestResult();
+
+				envIndex = Func.changeEnvIndex(envIndex);
+				System.out.println("========== Environment is Changed ==========");
+				System.out.println("Trail No.: " + envIndex);
+				antSimulator.parseMatrix(trailFiles[envIndex]);
+			}
+
 			// Anti-Convergence
 			repelConvergence(swarms);
 			

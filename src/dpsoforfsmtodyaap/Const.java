@@ -13,12 +13,12 @@ public final class Const {
 
 	// --- PSO Parameters --- //
 	static final int POPULATION       = 1000;
-	static final int MAXLOOP          = 250;
+	//static final int MAXLOOP          = 250;   // MAXLOOP is defined by NENVCHANGE
 	static final double VMIN          = -2.0;
 	static final double VMAX          = 2.0;
 	static final double W             = 0.0;
 	static final double C1            = 2.0;
-	static final double C2            = 1.0;
+	static final double C2            = 2.0;
 	
 	// --- Multi Swarm Parameters --- //
 	static final int NUMOFSWARMS      = 5;
