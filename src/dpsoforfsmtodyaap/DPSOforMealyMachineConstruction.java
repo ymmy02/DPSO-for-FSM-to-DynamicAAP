@@ -36,6 +36,19 @@ public class DPSOforMealyMachineConstruction {
 		swarm.updateGlobalBest(mealyMachineCodec);
 	}
 
+	private void printBestResult() {
+		System.out.println("========== Best Mealy Machine in This Environment ==========");
+		bestMealyMachine.printTransitionTable();
+		System.out.println("========== Best Routing in This Environment ==========");
+		antSimulator.runWithFSM(bestMealyMachine);
+		antSimulator.printRoute();
+		System.out.println("===================================================");
+		int eaten = antSimulator.getEaten();
+		int moves = antSimulator.getMoves();
+		System.out.println("The number of eaten foods : " + eaten + " Steps : " + moves);
+		antSimulator.reset();
+	}
+
 	private void repelConvergence(Swarm[] swarms) {
 		boolean isAllSwarmsConverged = true;
 		for (Swarm swarm : swarms) {
@@ -173,24 +186,6 @@ public class DPSOforMealyMachineConstruction {
 			setBest(swarms);
 			printLog(bestMatrix, bestFitness, n+1);
 			
-			if (n%Const.NENVCHANGE == 0 && n != 0) {
-				// Print Best Routing before the Environment is Changed
-				System.out.println("========== Best Mealy Machine in This Environment ==========");
-				bestMealyMachine.printTransitionTable();
-				System.out.println("========== Best Routing in This Environment ==========");
-				antSimulator.runWithFSM(bestMealyMachine);
-				antSimulator.printRoute();
-				System.out.println("===================================================");
-				int eaten = antSimulator.getEaten();
-				int moves = antSimulator.getMoves();
-				System.out.println("The number of eaten foods : " + eaten + " Steps : " + moves);
-				antSimulator.reset();
-
-				envIndex = Func.changeEnvIndex(envIndex);
-				System.out.println("========== Environment is Changed ==========");
-				System.out.println("Trail No.: " + envIndex);
-				antSimulator.parseMatrix(trailFiles[envIndex]);
-			}
 		}
 		
 	}
